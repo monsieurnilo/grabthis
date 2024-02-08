@@ -53,3 +53,10 @@ resources:
       Type: "AWS::S3::Bucket"
       Properties:
         BucketName: grabthisbucket
+
+package:
+  patterns:
+    - '!frontend/**'
+    - 'frontend/dist/**'
+
+
