@@ -19,6 +19,16 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: eu-west-3
+  iamRoleStatements:
+  - Effect: 'Allow'
+    Action:
+      - 's3:PutObject'
+      - 's3:GetObject'
+    Resource: "arn:aws:s3:::*/*"
+  - Effect: 'Allow'
+    Action:
+      - 's3:ListBucket'
+    Resource: "arn:aws:s3:::*"
 
 functions:
   createBucket:
@@ -58,5 +68,12 @@ package:
   patterns:
     - '!frontend/**'
     - 'frontend/dist/**'
+	
+plugins:
+  - serverless-finch
+ 
+custom:
+  client:
+    bucketName: grabthisbucket
 
 
