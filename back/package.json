@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "fs": "^0.0.1-security",
     "serverless": "^3.38.0"
   },
   "name": "grabthis"
