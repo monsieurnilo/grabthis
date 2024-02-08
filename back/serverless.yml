@@ -1,24 +1,30 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
 # Happy Coding!
 
 service: grabthis
 
 frameworkVersion: "3"
 
+plugins:
+  - serverless-frontend-plugin
+
 provider:
   name: aws
   runtime: nodejs18.x
   region: eu-west-3
+  iam:
+    role:
+      statements:
+        # Allow functions to list all buckets
+        - Effect: Allow
+          Action: "s3:ListBucket"
+          Resource: "*"
+        # Allow functions to read/write objects in a bucket
+        - Effect: Allow
+          Action:
+            - "s3:GetObject"
+            - "s3:PutObject"
+          Resource:
+            - "arn:aws:s3:::grabthisbucket/*"
 
 functions:
   createBucket:
@@ -53,3 +59,16 @@ resources:
       Type: "AWS::S3::Bucket"
       Properties:
         BucketName: grabthisbucket
+
+custom:
+  serverless-frontend-plugin:
+    distDir: frontend/dist
+    build:
+      command:
+        - npm
+        - run
+        - build
+
+package:
+  patterns:
+    - frontend/node_modules/**

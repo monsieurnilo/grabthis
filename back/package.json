@@ -1,7 +1,11 @@
 {
   "dependencies": {
     "fs": "^0.0.1-security",
+    "graceful-fs": "^4.2.11",
     "serverless": "^3.38.0"
   },
-  "name": "grabthis"
+  "name": "grabthis",
+  "devDependencies": {
+    "serverless-frontend-plugin": "^2.0.2"
+  }
 }
